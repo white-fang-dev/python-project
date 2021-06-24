@@ -1,0 +1,20 @@
+array = [x for x in range(0,10000)]
+
+def binarySearch(array,toSearch,l=None,h=None):
+    if l is None:
+        l = 0
+    if h is None:
+        h = len(array) - 1
+    if h < l:
+        return -1
+        
+    mid = (l+h)//2
+    
+    if array[mid] == toSearch:
+        return mid
+    
+    elif array[mid] > toSearch:
+        return binarySearch(array,toSearch,l,mid-1)
+    elif array[mid] < toSearch:
+        return binarySearch(array,toSearch,mid+1,h)
+    
