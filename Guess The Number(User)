@@ -1,0 +1,43 @@
+def replay():
+    replay = "wrong"
+    while replay not in ['y','n']:
+        replay = input("Do you want to play again\n").lower()
+        if replay == 'y':
+            return True
+        elif replay == 'n':
+            return False
+        else:
+            print("Invalid input\n")
+            
+            
+import random
+def guessTheNumber(n):
+    random_num = random.randint(1,n)
+    user_num = 0
+    while user_num != random_num:
+        user_num = int(input("Enter you guess\n"))
+        if user_num > random_num:
+            print(f"Guess Number lower than {user_num}\n")
+        elif user_num < random_num:
+            print(f"Guess Number higher than {user_num}\n")
+        else:
+            print(f"Congratulation!!! You guessed the right number {random_num}\n")
+
+
+print("Welcome to number guessing game\n")
+while True:
+    game_on = "wrong"
+    while game_on not in ['y','n']:
+        game_on = input("Do you want to start the game(y/n)\n").lower()
+        if game_on == 'y':
+            user_range= int(input("Enter the range from 1-"))
+            guessTheNumber(user_range)
+            break
+        elif game_on == 'n':
+            break
+        else:
+            print("Invalid Input\n")      
+    if game_on=='n':
+        break
+    if not replay():
+        break
