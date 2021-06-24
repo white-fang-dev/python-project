@@ -1,0 +1,54 @@
+import random
+def guessTheNumber(n):
+    low = 1
+    high = n
+    ans = "wrong"
+    while ans != 'c':
+        comp_guess = random.randint(low,high)
+        while ans !='c':
+            ans = input(f"Is {comp_guess} high(h), low(l) or correct(C)\n").lower()
+            if ans not in ['h','l','c']:
+                print("Invalid Input")
+            else:
+                break  
+        if ans == 'c':
+            break
+        if ans == 'h':
+            high = comp_guess-1
+        elif ans == 'l':
+            low = comp_guess + 1
+    print(f"Congratulation!!! You Guessed the right number {comp_guess}")
+    
+
+
+def replay():
+    replay = "wrong"
+    while replay not in ['y','n']:
+        replay = input("Do You want to play again(y/n)\n").lower()
+        if replay == 'y':
+            return True
+        elif replay == 'n':
+            return False
+        else:
+            print("Invalid Input")
+ 
+ 
+print("Welcome to Computer Guessing Game\n")
+while True:
+    game_on = "wrong"
+    while game_on not in ['y','n']:
+        game_on = input("do you want to start the game(y/n)\n")
+        if game_on == 'y':
+            n = int(input("Enter the range you want to play with 0-"))
+            guessTheNumber(n)
+        elif game_on == 'n':
+            break
+        else:
+            print("invalid input")
+    if game_on == 'n':
+        break  
+    elif not replay():
+        break
+            
+    
+    
