@@ -1,0 +1,70 @@
+def replay():
+    replay = "wrong"
+    while replay not in ['y','n']:
+        replay = input("Do You want to play again(y/n)\n")
+        if replay == 'y':
+            return True
+        elif replay =='n':
+            return False
+        else:
+            print("Invalid Input\n")
+            
+    
+    
+import random
+def rockPaperScissors():
+    comp_option = ['r','p','s']
+    user_choice = "wrong"
+    user_score = 0
+    comp_score = 0
+    total_tie = 0
+    no_of_rounds = int(input("Enter the number of rounds\n"))
+    for i in range(1,no_of_rounds+1):
+        print(f"Round {i}")
+        comp_choice = random.choice(comp_option)
+        while user_choice not in comp_option:
+            user_choice = input("Choose Rock(r), Paper(p) or Scissors(s)\n").lower()
+            if user_choice in comp_option:
+                print(f"Computer choice = {comp_choice}")
+                print(f"User choice = {user_choice}")
+                if comp_choice == 'p' and user_choice == 's' or comp_choice == 's' and user_choice == 'r' or comp_choice == 'r' and user_choice == "p":
+                    print("User wins")
+                    user_score += 1
+                elif comp_choice == 's' and user_choice == 'p' or comp_choice == 'r' and user_choice == 's' or comp_choice == 'p' and user_choice == "r":
+                    print("Computer win")
+                    comp_score += 1
+                else:
+                    print("Its a tie")
+                    total_tie += 1
+            else:
+                print("Invalid input")        
+        print("\n")        
+        user_choice = "wrong"
+    print("Final result\n")
+    print(f"User Final score = {user_score}\n")
+    print(f"Computer Final score = {comp_score}\n")
+    print(f"Match tied = {total_tie}\n")
+    if user_score > comp_score:
+        print(f"USer Wins The game with {user_score} point\n")
+    elif user_score < comp_score:
+        print(f"Computer Wins The game with {comp_score} point\n")
+    else:
+        print("Its a tie\n")
+        
+   
+   
+while True:
+    game_on = "wrong"
+    while game_on not in ['y','n']:
+        game_on = input("Do you want to start the game???(y/n)\n").lower()
+        if game_on == 'y':
+            rockPaperScissors()
+        elif game_on == 'n':
+            break
+        else:
+            print("Invalid Input")
+        
+    if game_on == 'n':
+        break
+    elif not replay():
+        break          
