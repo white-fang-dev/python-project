@@ -1,0 +1,85 @@
+from IPython.display import clear_output             #used to clear the display everytime it is called
+def display(answer,alphabets):
+    clear_output()
+    print(answer)
+    print("\n")
+    print(f"Letters Remaining= {alphabets}")
+    
+    
+def replay():
+    replay ="wrong"
+    while replay not in ['y','n']:
+        replay = input("Do you want to play again???(y/n)\n")
+        if replay == 'y':
+            return True
+        elif replay =='n':
+            return False
+        else:
+            print("Invalid Input")   
+
+
+def winCheck(rand_letter,answer):
+    if rand_letter == answer:
+        return True
+    else:
+        return False
+        
+        
+        
+def letterPlacing(rand_letter, user_char, answer):
+    for i in range(0,len(rand_letter)):
+        if rand_letter[i] == user_char:
+            answer[i] = user_char 
+    return rand_letter,answer
+    
+ 
+ 
+import random
+import string
+def hangman():
+    words = ['sequoia','suphori','pluviophile','clinomania','idyllic','aurora','solitude','supine','aquiver','mellifluous','ineffable','hiraeth','nefarious','somnambulist','epoch','sonorous','serendipity']
+    rand_letter = [x.upper() for x in random.choice(words)]   #list comprehension to convvert the words into uppercase
+    answer = ["_" for x in rand_letter]                       #list comprehension for starting board of hangman
+    alphabets = list(string.ascii_uppercase)                  #list(string.ascii_uppercase) used for getting letter from a-z in a list
+    lives = 9
+    print(answer)
+    print("\n")
+    print(f"Alphabets REmaining = {alphabets}")
+    while lives != 0:
+        print(f"Lives = {lives}")
+        while True:
+            user_char = input("Enter your guess\n").upper()
+            if user_char in rand_letter and user_char in alphabets:
+                alphabets.remove(user_char)
+                rand_letter,answer = letterPlacing(rand_letter, user_char, answer)
+                break
+            elif user_char in alphabets:
+                alphabets.remove(user_char)
+                lives -= 1
+                break
+            else:
+                print("invalid Input/Letter already selected")
+        display(answer,alphabets)
+        if winCheck(rand_letter,answer):
+            print("Congratulations!!!! You won")
+            break  
+    if lives == 0:
+        print("You are out of lives!!! You loose")
+        
+        
+print("Wecome To hangman!!!\n")
+while True:
+    game_on = "wrong"
+    while game_on not in ['y','n']:
+        game_on = input("Do you want to start the game(y/n)\n")
+        if game_on == 'y':
+            hangman()
+        elif game_on == 'n':
+            break
+        else:
+            print("Invalid Input\n")
+    
+    if game_on == 'n':
+        break
+    elif not replay():
+        break
